@@ -17,8 +17,23 @@ public class HandlerTest {
         List<String> unmodifiedLines = List.of("#hello   #hi   #hello, friend");
         Map<String, Integer> modifiedMap = handler.receiveTopFiveHashTags(unmodifiedLines);
         Map<String, Integer> expectedMap = Map.ofEntries(
-                Map.entry("hello", 1),
-                Map.entry("hi", 1)
+                Map.entry("#hello", 1),
+                Map.entry("#hi", 1)
+        );
+        assertTrue(expectedMap.equals(modifiedMap));
+    }
+
+    @Test
+    public void testHardSingleLine() {
+
+        List<String> unmodifiedLines = List.of("#one#one#two#two#three    four   #five six#seven eight  ");
+        Map<String, Integer> modifiedMap = handler.receiveTopFiveHashTags(unmodifiedLines);
+        Map<String, Integer> expectedMap = Map.ofEntries(
+                Map.entry("#one", 1),
+                Map.entry("#two", 1),
+                Map.entry("#three", 1),
+                Map.entry("#five", 1),
+                Map.entry("#seven", 1)
         );
         assertTrue(expectedMap.equals(modifiedMap));
     }
@@ -29,11 +44,11 @@ public class HandlerTest {
         List<String> unmodifiedLines = List.of("#hello   #hi   #hello, friend", "   #hello   fire #see   #bat", "#f1#bat", "#f2", "f3#f2", "####");
         Map<String, Integer> modifiedMap = handler.receiveTopFiveHashTags(unmodifiedLines);
         Map<String, Integer> expectedMap = Map.ofEntries(
-                Map.entry("hello", 2),
-                Map.entry("bat", 2),
-                Map.entry("f2", 2),
-                Map.entry("f1", 1),
-                Map.entry("hi", 1)
+                Map.entry("#hello", 2),
+                Map.entry("#bat", 2),
+                Map.entry("#f2", 2),
+                Map.entry("#f1", 1),
+                Map.entry("#hi", 1)
         );
         assertTrue(expectedMap.equals(modifiedMap));
     }

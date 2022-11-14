@@ -1,25 +1,40 @@
 package TaskThree;
 
+import java.util.Objects;
+
 public class Cube extends Figure {
 
-    public Cube(Double ... params) {
-        super(params);
+    private double edge;
+
+    public Cube(double edge) {
+        this.edge = edge;
     }
     @Override
     public Double getVolume() {
-
-        if (getParams().length != 1) {
-            throw new IllegalStateException("Number of parameters in cube has to be equalled one.");
-        }
         // TODO check for overflowing
-        Double a = getParams()[0];
-        Double volume = a * a * a;
+        Double volume = edge * edge * edge;
 
         return volume;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Cube{volume: " + getVolume() + "}";
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cube cube = (Cube) o;
+        return Double.compare(cube.edge, edge) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(edge);
+    }
+
+    @Override
+    public String toString() {
+        return "Cube{" +
+                "edge=" + edge +
+                ", volume=" + getVolume() +
+                '}';
+    }
 }

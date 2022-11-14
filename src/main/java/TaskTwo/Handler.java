@@ -1,7 +1,14 @@
 package TaskTwo;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Comparator;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Handler {
 
@@ -18,6 +25,8 @@ public class Handler {
         }
 
         Map<String, Integer> hashTagsRate = calculateHashTagsRate(lines);
+
+//        System.out.println(hashTagsRate);
 
         Set<Map.Entry<String, Integer>> sortedHashTagsRate = receiveSortedHashTagsRate(hashTagsRate);
 
@@ -60,7 +69,7 @@ public class Handler {
         Map<String, Integer> hashTagsRate = new TreeMap<>();
         for (String line : lines) {
             List<String> hashTags = receiveUniqueHashTagsFromLine(line);
-            // increase hashtag rate by one
+                    // increase hashtag rate by one
             hashTags.stream()
                     .forEach(hashTag -> hashTagsRate.put(hashTag, hashTagsRate.getOrDefault(hashTag, 0) + 1));
         }
@@ -68,48 +77,28 @@ public class Handler {
         return hashTagsRate;
     }
 
+
     /**
      * Finds hashtags in line
      * @param line String
      * @return List of Strings
      */
     private List<String> receiveUniqueHashTagsFromLine(String line) {
-        // gets all words out of line
-        List<String> words = List.of(line.split("[\s\n,\\.\\t!?]+"));
+        // here will be stored unique hashtags
+        List<String> words = new ArrayList<>();
+        // get strings which starts with ONE '#' character and may have letters after it
+        Pattern pattern = Pattern.compile("#[\\w_]+");
+        Matcher matcher = pattern.matcher(line);
 
-        // separates hashtags like "#f1#f2## into different ones
-        List<String> wordsWithSeparatedHashTags = new ArrayList<>();
-        for (String word : words) {
-            String newWord = word;
-            // deletes first part of the word if it is not a hashtag
-            if (!word.startsWith("#")) newWord = deleteUntilSymbol(word, '#');
-            newWord = newWord.trim();
-            if (newWord.isEmpty()) continue;
-            wordsWithSeparatedHashTags.addAll(List.of(newWord.split("[#]+")));
-
+        while (matcher.find()) {
+            words.add(matcher.group());
         }
-
-        // get unique hashtags
-        Set<String> uniqueHashTags = wordsWithSeparatedHashTags.stream()
+        // deleting empty and same elements
+        return words.stream()
+                .distinct()
                 .filter(word -> !word.isEmpty())
-                .collect(Collectors.toSet());
+                .toList();
 
-        return new ArrayList<>(uniqueHashTags);
-    }
-
-    /**
-     * Deletes symbols in word until symbol variable comes
-     * @param word entire word
-     * @param symbol symbol before which's first appearance substring has to be deleted
-     * @return String with deleted substring or empty string if there were no symbol appearance
-     */
-    private String deleteUntilSymbol(String word, char symbol) {
-
-        StringBuffer builder = new StringBuffer(word);
-        int end = builder.indexOf("#");
-        if (end == -1) return "";
-        builder.delete(0, end);
-        return builder.toString();
     }
 
 }
