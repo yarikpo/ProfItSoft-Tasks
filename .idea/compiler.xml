@@ -13,6 +13,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ProfItSoft-Tasks" target="17" />
       <module name="ProfItSoft_lec_01_02_task" target="17" />
     </bytecodeTargetLevel>
   </component>
