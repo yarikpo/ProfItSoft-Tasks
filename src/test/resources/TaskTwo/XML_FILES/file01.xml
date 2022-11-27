@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<violations>
+    <violation>
+        <date_time>2020-05-05 15:39:03</date_time>
+        <firs_name>Ivan</firs_name>
+        <last_name>Ivanov</last_name>
+        <type>SPEEDING</type>
+        <fine_amount>340.00</fine_amount>
+    </violation>
+</violations>
