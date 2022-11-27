@@ -29,24 +29,43 @@ public class SAXHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * If data is correct -- adds it to map
+     * @param uri The Namespace URI, or the empty string if the
+     *        element has no Namespace URI or if Namespace
+     *        processing is not being performed.
+     * @param localName The local name (without prefix), or the
+     *        empty string if Namespace processing is not being
+     *        performed.
+     * @param qName The qualified name (with prefix), or the
+     *        empty string if qualified names are not available.
+     * @throws SAXException
+     */
     @Override
     public void endElement(String uri, String localName,
                            String qName) throws SAXException {
 
         switch (qName) {
             case "violation":
-                finesByTypes.put(
-                        violation.getType(),
-                        finesByTypes.getOrDefault(violation.getType(), 0.0) + violation.getFineAmount()
-                );
+                if (violation.getType().isEmpty() == false && violation.getFineAmount() > 0.0) {
+                    finesByTypes.put(
+                            violation.getType(),
+                            finesByTypes.getOrDefault(violation.getType(), 0.0) + violation.getFineAmount()
+                    );
+                }
                 break;
 
             case "type":
                 violation.setType(content);
                 break;
-//                TODO check for non double variables
+
             case "fine_amount":
-                violation.setFineAmount(Double.parseDouble(content));
+                try {
+                    violation.setFineAmount(Double.parseDouble(content));
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("NULL is not allowed to fine_amount field.");
+                }
                 break;
         }
     }

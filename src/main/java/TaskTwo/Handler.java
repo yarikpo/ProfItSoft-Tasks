@@ -1,35 +1,98 @@
 package TaskTwo;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 public class Handler {
 
     private static final SAXParserFactory factory = SAXParserFactory.newInstance();
     private static final SAXHandler handler = new SAXHandler();
     private static SAXParser parser;
+    private static final ObjectMapper DEFAULT_MAPPER;
+
+    static {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        DEFAULT_MAPPER = mapper;
+    }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         File directory = new File("src/test/resources/TaskTwo/XML_FILES");
         System.out.println(directory.getAbsoluteFile());
         Arrays.stream(directory.list()).forEach(System.out::println);
 
         readDataFromFolder(directory);
+        convertMap2JSON(makeSortedMap(handler.getFinesByTypes()));
     }
 
-    public static void convertMap2JSON(Map<String, Double> finesByTypes) {
+    /**
+     * Sorts map by double value
+     * @param finesByTypes
+     * @return sorted Map
+     */
+    public static Map<String, Double> makeSortedMap(Map<String, Double> finesByTypes) {
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        JsonFactory factory = new JsonFactory();
+        Map<String, Double> result = new LinkedHashMap<>();
+
+        List<Map.Entry<String, Double>> entryList = new ArrayList<>(finesByTypes.entrySet());
+        entryList.sort(Map.Entry.comparingByValue());
+        Collections.reverse(entryList);
+
+        for (Map.Entry<String, Double> entry : entryList) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
+    /**
+     * Converts map into JSON file
+     * @param finesByTypes
+     * @throws IOException
+     */
+    public static void convertMap2JSON(Map<String, Double> finesByTypes) throws IOException {
+
+        try (JsonGenerator generator =
+                DEFAULT_MAPPER.getFactory().createGenerator(
+                        new File("src/test/resources/TaskTwo/JSON_FILES/result.json"),
+                        JsonEncoding.UTF8
+                )) {
+
+            generator.writeStartObject();
+            generator.writeFieldName("fines");
+            generator.writeStartArray();
+
+            for (Map.Entry<String, Double> fineByType : finesByTypes.entrySet()) {
+                generator.writeStartObject();
+                generator.writeStringField("type", fineByType.getKey());
+                generator.writeNumberField("fine_amount", Math.ceil(fineByType.getValue() * 100.0) / 100.0);
+                generator.writeEndObject();
+            }
+
+            generator.writeEndArray();
+            generator.writeEndObject();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
+    /**
+     * Goes through all files from folder
+     * @param directory
+     */
     public static void readDataFromFolder(File directory) {
 
         if (directory == null || directory.isDirectory() == false) {
@@ -44,6 +107,10 @@ public class Handler {
         }
     }
 
+    /**
+     * Parses each file
+     * @param file
+     */
     public static void readDataFromFile(File file) {
 
         try {
