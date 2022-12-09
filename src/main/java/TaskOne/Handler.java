@@ -1,140 +1,120 @@
 package TaskOne;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Handler {
 
-    private static BufferedReader reader;
-    private static BufferedWriter writer;
-    // if in one line there are more than one person this variable will handle all people except first one other-vice it handles null
-    private static String lastLine = null;
-    private static boolean isClosedReader = false;
+    private static final SAXParserFactory factory = SAXParserFactory.newInstance();
+    private static final SAXHandler handler = new SAXHandler();
+    private static SAXParser parser;
+    private static final ObjectMapper DEFAULT_MAPPER;
+
+    static {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        DEFAULT_MAPPER = mapper;
+    }
+
+
+    public static void main(String[] args) throws IOException {
+
+        File directory = new File("src/test/resources/TaskOne/XML_FILES");
+        System.out.println(directory.getAbsoluteFile());
+        Arrays.stream(directory.list()).forEach(System.out::println);
+
+        readDataFromFolder(directory);
+        convertMap2JSON(makeSortedMap(handler.getFinesByTypes()));
+    }
 
     /**
-     * Creates copy of the XML file with merged name and surname
+     * Sorts map by double value
+     * @param finesByTypes
+     * @return sorted Map
+     */
+    public static Map<String, Double> makeSortedMap(Map<String, Double> finesByTypes) {
+
+        return finesByTypes.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new));
+    }
+
+    /**
+     * Converts map into JSON file
+     * @param finesByTypes
+     * @throws IOException
+     */
+    public static void convertMap2JSON(Map<String, Double> finesByTypes) throws IOException {
+
+        try (JsonGenerator generator =
+                DEFAULT_MAPPER.getFactory().createGenerator(
+                        new File("src/test/resources/TaskOne/JSON_FILES/result.json"),
+                        JsonEncoding.UTF8
+                )) {
+
+            generator.writeStartObject();
+            generator.writeFieldName("fines");
+            generator.writeStartArray();
+
+            for (Map.Entry<String, Double> fineByType : finesByTypes.entrySet()) {
+                generator.writeStartObject();
+                generator.writeStringField("type", fineByType.getKey());
+                generator.writeNumberField("fine_amount", Math.ceil(fineByType.getValue() * 100.0) / 100.0);
+                generator.writeEndObject();
+            }
+
+            generator.writeEndArray();
+            generator.writeEndObject();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /**
+     * Goes through all files from folder
+     * @param directory
+     */
+    public static void readDataFromFolder(File directory) {
+
+        if (directory == null || directory.isDirectory() == false) {
+            throw new IllegalArgumentException("Must be directory.");
+        }
+
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            if (file.getName().toLowerCase().endsWith(".xml") == false) continue;
+
+            readDataFromFile(file);
+        }
+    }
+
+    /**
+     * Parses each file
      * @param file
-     * @throws IOException
      */
-    public static void mergeNameSurname(Path file) throws IOException {
+    public static void readDataFromFile(File file) {
 
-        writer = new BufferedWriter(new FileWriter(file.toAbsolutePath().getParent().toString() + "/copy_" + file.getFileName()));
-        reader = new BufferedReader(new FileReader(file.toAbsolutePath().toString()));
-
-        // cycle will be repeated until it is impossible to read
-        while (!isClosedReader) {
-            String text = personReader();
-            text = replaceNameSurname(text);
-            personCopyWriter(text);
+        try {
+            parser = factory.newSAXParser();
+            parser.parse(file, handler);
         }
-
-        writer.close();
+        catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalStateException("Something wrong with parser.");
+        }
     }
 
-    /**
-     * merges name and surname in paragraph with exactly maximum one person
-     * @param text
-     * @return String modified text
-     */
-    private static String replaceNameSurname(String text) {
-
-        Pattern namePattern = Pattern.compile("(.*\\Wname\\s*=\\s*\")([^\"]*)(\".*)");
-        Pattern surnamePattern = Pattern.compile("\\s*surname\\s*=\\s*\"([^\"]*)\"\\s*");
-
-        Matcher matcher = namePattern.matcher(text);
-        String beforeName, name, afterName, whatReplace;
-        if (matcher.find()) {
-            whatReplace = matcher.group();
-            beforeName = matcher.group(1);
-            name = matcher.group(2);
-            afterName = matcher.group(3);
-        }
-        else {
-            return text;
-        }
-
-        matcher = surnamePattern.matcher(text);
-        String surname;
-        if (matcher.find()) {
-            surname = matcher.group(1);
-        }
-        else {
-            return text;
-        }
-
-        text = text.replace(whatReplace, beforeName + name + " " + surname + afterName);
-        text = text.replaceFirst("surname\\s*=\\s*\"[^\"]*\"", "");
-
-        return text;
-    }
-
-    /**
-     * Writes text into writer
-     * @param text
-     * @throws IOException
-     */
-    private static void personCopyWriter(String text) throws IOException {
-
-        writer.write(text);
-    }
-
-    /**
-     * Reads lines until close tag or end of the file
-     * @return String text which has to finish with closed tag
-     * @throws IOException
-     */
-    private static String personReader() throws IOException {
-
-        StringBuilder result = new StringBuilder("");
-        String line = "";
-
-        // if in previous line there were more than one person
-        if (lastLine != null) {
-
-            if (appendLine(result, lastLine) == true) {
-                return result.toString();
-            }
-            else {
-                result.append("\n");
-                lastLine = null;
-            }
-        }
-
-        while((line = reader.readLine()) != null) {
-            if (appendLine(result, line) == true) {
-                return result.toString();
-            }
-            else {
-                result.append(line);
-                result.append("\n");
-                lastLine = null;
-            }
-        }
-        reader.close();
-        isClosedReader = true;
-        return result.toString();
-    }
-
-    /**
-     * Appends peice of line to builder until finds closed tag
-     * @param builder
-     * @param line
-     * @return false when there is no closed tag
-     * @return true when there is closed tag
-     */
-    private static boolean appendLine(StringBuilder builder, String line) {
-
-        int closeIndex = line.indexOf("/>");
-        if (closeIndex == -1) return false;
-
-        // appends until closed tag
-        builder.append(line.substring(0, closeIndex + 2));
-        // saves text after closed tag
-        lastLine = line.substring(closeIndex + 2);
-
-        return true;
-    }
 
 }

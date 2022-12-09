@@ -1,4 +1,4 @@
-package TaskTwo;
+package TaskOne;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -47,7 +47,7 @@ public class SAXHandler extends DefaultHandler {
 
         switch (qName) {
             case "violation":
-                if (violation.getType().isEmpty() == false && violation.getFineAmount() > 0.0) {
+                if (!violation.getType().isEmpty() && violation.getFineAmount() > 0.0) {
                     finesByTypes.put(
                             violation.getType(),
                             finesByTypes.getOrDefault(violation.getType(), 0.0) + violation.getFineAmount()
