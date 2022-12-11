@@ -5,12 +5,12 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SAXHandler extends DefaultHandler {
 
-    private Map<String, Double> finesByTypes = new HashMap<>();
+    private Map<String, Double> finesByTypes = new ConcurrentHashMap<>();
     private Violation violation;
     private String content;
 
