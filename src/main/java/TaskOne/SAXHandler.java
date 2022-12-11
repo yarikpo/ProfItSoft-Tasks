@@ -5,14 +5,18 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class SAXHandler extends DefaultHandler {
 
-    private Map<String, Double> finesByTypes = new ConcurrentHashMap<>();
+    private Map<String, Double> finesByTypes = new HashMap<>();
     private Violation violation;
     private String content;
+
+    public SAXHandler(Map<String, Double> finesByTypes) {
+        this.finesByTypes = finesByTypes;
+    }
 
     public Map<String, Double> getFinesByTypes() {
         return Collections.unmodifiableMap(finesByTypes);

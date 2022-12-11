@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b85bb9-7e65-4b85-af08-042b40a1df1b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProfItSoft_lec_01_02_task.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TaskOne/HandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file03.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file05.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TaskOne/CallableFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskOne/CallableFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TaskOne/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskOne/Handler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TaskOne/SAXHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskOne/SAXHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/TaskOne/JSON_FILES/result.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/JSON_FILES/result.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file01.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file02.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/TaskOne/XML_FILES/file02.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +53,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="Handler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskOne.Handler" />
+  <component name="RunManager" selected="JUnit.HandlerTest">
+    <configuration name="HandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProfItSoft_lec_01_02_task" />
       <extension name="coverage">
         <pattern>
@@ -67,13 +62,84 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="TaskOne" />
+      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testEightHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskOne.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskOne" />
+      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
+      <option name="METHOD_NAME" value="testEightHandler" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testFourHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskOne.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskOne" />
+      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
+      <option name="METHOD_NAME" value="testFourHandler" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testSingleHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskOne.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskOne" />
+      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
+      <option name="METHOD_NAME" value="testSingleHandler" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testTwoHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskOne.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskOne" />
+      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
+      <option name="METHOD_NAME" value="testTwoHandler" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Handler" />
+        <item itemvalue="JUnit.HandlerTest" />
+        <item itemvalue="JUnit.HandlerTest.testEightHandler" />
+        <item itemvalue="JUnit.HandlerTest.testSingleHandler" />
+        <item itemvalue="JUnit.HandlerTest.testFourHandler" />
+        <item itemvalue="JUnit.HandlerTest.testTwoHandler" />
       </list>
     </recent_temporary>
   </component>
