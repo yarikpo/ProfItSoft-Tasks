@@ -78,7 +78,7 @@ public class Handler {
             try {
                 int realVal = Integer.parseInt(value);
                 field.setAccessible(true);
-                field.setInt(object, realVal);
+                field.set(object, realVal);
             }
             catch (NumberFormatException e) {
                 e.printStackTrace();
