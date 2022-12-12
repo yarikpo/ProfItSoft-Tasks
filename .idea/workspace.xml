@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b85bb9-7e65-4b85-af08-042b40a1df1b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/TaskTwo/ExampleClass2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TaskTwo/ExampleClass3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TaskTwo/ExampleClass4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties3-1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties3-2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TaskTwo/ExampleClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskTwo/ExampleClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TaskTwo/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskTwo/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/TaskTwo/properties.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TaskTwo/HandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TaskTwo/HandlerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,55 +54,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.HandlerTest.testHandler">
+  <component name="RunManager" selected="JUnit.HandlerTest">
     <configuration name="HandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProfItSoft_lec_01_02_task" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="TaskOne.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="TaskOne" />
-      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HandlerTest.testEightHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProfItSoft_lec_01_02_task" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="TaskOne.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="TaskOne" />
-      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
-      <option name="METHOD_NAME" value="testEightHandler" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HandlerTest.testFourHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProfItSoft_lec_01_02_task" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="TaskOne.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="TaskOne" />
-      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
-      <option name="METHOD_NAME" value="testFourHandler" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HandlerTest.testHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProfItSoft_lec_01_02_task" />
       <extension name="coverage">
         <pattern>
@@ -105,23 +65,70 @@
       </extension>
       <option name="PACKAGE_NAME" value="TaskTwo" />
       <option name="MAIN_CLASS_NAME" value="TaskTwo.HandlerTest" />
-      <option name="METHOD_NAME" value="testHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testNoFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskTwo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskTwo" />
+      <option name="MAIN_CLASS_NAME" value="TaskTwo.HandlerTest" />
+      <option name="METHOD_NAME" value="testNoFile" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HandlerTest.testSingleHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HandlerTest.testWrongInstant" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProfItSoft_lec_01_02_task" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="TaskOne.*" />
+          <option name="PATTERN" value="TaskTwo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="TaskOne" />
-      <option name="MAIN_CLASS_NAME" value="TaskOne.HandlerTest" />
-      <option name="METHOD_NAME" value="testSingleHandler" />
+      <option name="PACKAGE_NAME" value="TaskTwo" />
+      <option name="MAIN_CLASS_NAME" value="TaskTwo.HandlerTest" />
+      <option name="METHOD_NAME" value="testWrongInstant" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testWrongPattern" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskTwo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskTwo" />
+      <option name="MAIN_CLASS_NAME" value="TaskTwo.HandlerTest" />
+      <option name="METHOD_NAME" value="testWrongPattern" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandlerTest.testWrongPropertyFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProfItSoft_lec_01_02_task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TaskTwo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TaskTwo" />
+      <option name="MAIN_CLASS_NAME" value="TaskTwo.HandlerTest" />
+      <option name="METHOD_NAME" value="testWrongPropertyFile" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -129,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HandlerTest.testHandler" />
         <item itemvalue="JUnit.HandlerTest" />
-        <item itemvalue="JUnit.HandlerTest.testEightHandler" />
-        <item itemvalue="JUnit.HandlerTest.testSingleHandler" />
-        <item itemvalue="JUnit.HandlerTest.testFourHandler" />
+        <item itemvalue="JUnit.HandlerTest.testNoFile" />
+        <item itemvalue="JUnit.HandlerTest.testWrongPropertyFile" />
+        <item itemvalue="JUnit.HandlerTest.testWrongPattern" />
+        <item itemvalue="JUnit.HandlerTest.testWrongInstant" />
       </list>
     </recent_temporary>
   </component>

@@ -9,15 +9,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Handler {
 
-    private static Map<String, String> properties = new HashMap<>();
+    private static Map<String, String> properties;
 
+    /**
+     * Returns object with values from fields from property file
+     * @param cls
+     * @param propertiesPath
+     * @return
+     * @param <T>
+     */
     public static <T> T loadFromProperties(Class<T> cls, Path propertiesPath) {
 
+        properties = new HashMap<>();
         T resultClass;
 
         try {
@@ -38,6 +45,11 @@ public class Handler {
         return resultClass;
     }
 
+    /**
+     * Goes through all properties in file
+     * @param object
+     * @param <T>
+     */
     private static <T> void fillObjectWithProperties(T object) {
 
         for (Map.Entry<String, String> entry : properties.entrySet()) {
@@ -45,6 +57,13 @@ public class Handler {
         }
     }
 
+    /**
+     * Operates with one property and fills Map with not parsed properties till last command
+     * @param object
+     * @param key
+     * @param value
+     * @param <T>
+     */
     private static <T> void fillObjectWithProperty(T object, String key, String value) {
 
         List<Field> fieldsToChange = new ArrayList<>();
@@ -75,6 +94,13 @@ public class Handler {
         changeField(object, fieldToChange, value);
     }
 
+    /**
+     * Changes field with checking for errors
+     * @param object
+     * @param field
+     * @param value
+     * @param <T>
+     */
     private static <T> void changeField(T object, Field field, String value) {
 
         if (field.getType() == Integer.class || field.getType() == int.class) {
@@ -85,7 +111,7 @@ public class Handler {
             }
             catch (NumberFormatException e) {
                 e.printStackTrace();
-                throw new IllegalArgumentException("" + field.getName() + " must be an " + field.getType() + " in properties file.");
+                throw new IllegalArgumentException("Illegal type.");
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
@@ -112,6 +138,12 @@ public class Handler {
         }
     }
 
+    /**
+     * Parses String to Instant
+     * @param field
+     * @param value
+     * @return
+     */
     private static Instant parseInstant(Field field, String value) {
 
         if (!field.isAnnotationPresent(Property.class) || field.getAnnotation(Property.class).format().isEmpty()) {
@@ -124,7 +156,7 @@ public class Handler {
         try {
             time = LocalDateTime.parse(value, DateTimeFormatter.ofPattern(pattern));
         }
-        catch (DateTimeParseException e) {
+        catch (Exception e) {
             e.printStackTrace();
             throw new IllegalStateException("Incorrect format property in class.");
         }
@@ -132,6 +164,11 @@ public class Handler {
         return time.toInstant(ZoneOffset.UTC);
     }
 
+    /**
+     * Fills Map with properties
+     * @param properties
+     * @param propertiesPath
+     */
     private static void fillProperties(Map<String, String> properties, Path propertiesPath) {
 
         try (BufferedReader bf = new BufferedReader(new FileReader(propertiesPath.toFile()))) {
@@ -146,7 +183,7 @@ public class Handler {
         }
         catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("There are some troubles with file - " + propertiesPath.toString());
+            throw new IllegalArgumentException("There are some troubles with file.");
         }
     }
 
