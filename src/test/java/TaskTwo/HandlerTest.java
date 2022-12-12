@@ -12,6 +12,7 @@ public class HandlerTest {
 
         Class<ExampleClass> cls = ExampleClass.class;
         Path propertyPath = Paths.get("src/test/resources/TaskTwo/properties.txt");
-        Handler.loadFromProperties(cls, propertyPath);
+        ExampleClass ex = Handler.loadFromProperties(cls, propertyPath);
+        System.out.println(ex);
     }
 }

@@ -11,4 +11,13 @@ public class ExampleClass {
 
     @Property(format = "dd.MM.yyyy tt:mm")
     private Instant timeProperty;
+
+    @Override
+    public String toString() {
+        return "ExampleClass{" +
+                "stringProperty='" + stringProperty + '\'' +
+                ", myNumber=" + myNumber +
+                ", timeProperty=" + timeProperty +
+                '}';
+    }
 }
