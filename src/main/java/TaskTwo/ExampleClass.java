@@ -9,7 +9,7 @@ public class ExampleClass {
     @Property(name="numberProperty")
     private int myNumber;
 
-    @Property(format = "dd.MM.yyyy tt:mm")
+    @Property(format = "dd.MM.yyyy HH:mm")
     private Instant timeProperty;
 
     @Override

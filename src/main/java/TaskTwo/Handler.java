@@ -7,6 +7,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Handler {
@@ -87,6 +90,46 @@ public class Handler {
                 throw new RuntimeException(e);
             }
         }
+        else if (field.getType() == String.class) {
+            try {
+                field.setAccessible(true);
+                field.set(object, value);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if (field.getType() == Instant.class) {
+            try {
+                Instant realInst = parseInstant(field, value);
+                field.setAccessible(true);
+                field.set(object, realInst);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Field has not been found.");
+        }
+    }
+
+    private static Instant parseInstant(Field field, String value) {
+
+        if (!field.isAnnotationPresent(Property.class) || field.getAnnotation(Property.class).format().isEmpty()) {
+            throw new IllegalArgumentException("Incorrect Instant variable format.");
+        }
+
+        String pattern = field.getAnnotation(Property.class).format();
+
+        LocalDateTime time;
+        try {
+            time = LocalDateTime.parse(value, DateTimeFormatter.ofPattern(pattern));
+        }
+        catch (DateTimeParseException e) {
+            e.printStackTrace();
+            throw new IllegalStateException("Incorrect format property in class.");
+        }
+
+        return time.toInstant(ZoneOffset.UTC);
     }
 
     private static void fillProperties(Map<String, String> properties, Path propertiesPath) {
