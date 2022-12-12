@@ -1,0 +1,3 @@
+stringProperty=value1
+numberProperty=10
+timeProperty=29.11.2022 18:30
